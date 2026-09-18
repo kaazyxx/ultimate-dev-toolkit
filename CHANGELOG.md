@@ -4,6 +4,19 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/) and
 [Semantic Versioning](https://semver.org/).
 
+## [1.2.0] - 2026-09-18
+
+### Added
+- Scientific skills: bioinformatics, quantum computing, computational geometry, GIS/geospatial, robotics (ROS 2), computer algebra, numerical methods, signal processing.
+- Emerging languages: Elm, Gleam, Mojo, PureScript, Roc, Ballerina.
+- Advanced data/ML skills: anomaly detection, causal inference, feature store, model monitoring, data versioning (DVC), synthetic data.
+- Tooling & platform skills: Nix, just, direnv, tmux, Neovim config, dotfiles, platform engineering, Backstage, GitOps (Flux), secrets rotation, infra testing, Chaos Mesh.
+- Commands: dev (diagram/env), data (profile/anomaly/versioning), sci (notebook/gis-inspect), tool (tasks), platform (scaffold), test (mutation/property), security (reverse).
+- Agents: numerical-reviewer, data-quality-reviewer, nix-build-resolver, platform-engineer, bioinformatics-reviewer, reverse-engineering-analyst, gis-reviewer, signal-processing-reviewer.
+
+### Changed
+- Totals: **416 skills, 136 commands, 88 agents, 27 hooks, 4 connectors**.
+
 ## [1.1.0] - 2026-09-18
 
 ### Added
