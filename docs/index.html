@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ultimate Dev Toolkit — 520-skill security-first Claude Code plugin</title>
+  <meta name="description" content="A modular, security-first universal developer toolkit for Claude Code: 520 environment-aware skills, 176 slash commands, 120 specialist agents, 28 safety hooks and 4 MCP connectors. Detects what is really installed and never fakes support." />
+  <meta name="keywords" content="claude code, claude code plugin, claude code skills, claude code agents, claude code marketplace, mcp, model context protocol, developer tools, devops, ai agents, code review, ultimate dev toolkit, anthropic" />
+  <meta name="author" content="kaazyxx" />
+  <link rel="canonical" href="https://kaazyxx.github.io/ultimate-dev-toolkit/" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ultimate Dev Toolkit — security-first Claude Code plugin" />
+  <meta property="og:description" content="520 skills · 176 commands · 120 agents · 28 hooks · 4 MCP connectors for Claude Code. Honest tool detection, never fakes support." />
+  <meta property="og:url" content="https://kaazyxx.github.io/ultimate-dev-toolkit/" />
+  <meta property="og:site_name" content="Ultimate Dev Toolkit" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ultimate Dev Toolkit — Claude Code plugin" />
+  <meta name="twitter:description" content="520 skills · 176 commands · 120 agents · 28 hooks · 4 connectors. Security-first, honest tool detection." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Ultimate Dev Toolkit",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, macOS, Linux",
+    "description": "A modular, security-first universal developer toolkit for Claude Code: 520 skills, 176 slash commands, 120 agents, 28 safety hooks and 4 MCP connectors.",
+    "url": "https://github.com/kaazyxx/ultimate-dev-toolkit",
+    "author": { "@type": "Person", "name": "kaazyxx", "url": "https://github.com/kaazyxx" },
+    "license": "https://opensource.org/licenses/MIT",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #16161e; --panel: #1a1b27; --fg: #c0caf5; --muted: #565f89;
+      --accent: #7aa2f7; --cyan: #7dcfff; --purple: #bb9af7; --gold: #e0af68; --green: #9ece6a;
+      --border: #292e42; --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--fg);
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+    header { text-align: center; padding: 72px 20px 40px; }
+    h1 { font-size: clamp(2rem, 6vw, 3.4rem); margin: 0 0 10px; letter-spacing: -1px;
+      background: linear-gradient(90deg, var(--accent), var(--purple), var(--cyan));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .tagline { color: var(--muted); font-size: 1.1rem; margin: 0 auto; max-width: 620px; }
+    .badges { margin: 26px 0 10px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+    .badge { background: var(--panel); border: 1px solid var(--border); border-radius: 999px;
+      padding: 6px 14px; font-size: .82rem; color: var(--fg); }
+    .badge b { color: var(--accent); }
+    .cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
+    .btn { display: inline-block; padding: 12px 22px; border-radius: var(--radius); font-weight: 600;
+      border: 1px solid var(--border); transition: transform .12s ease, border-color .12s ease; }
+    .btn:hover { transform: translateY(-2px); text-decoration: none; border-color: var(--accent); }
+    .btn.primary { background: linear-gradient(90deg, var(--accent), var(--purple)); color: #0d0e14; border: none; }
+    .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 46px 0; }
+    .stat { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px 10px; text-align: center; }
+    .stat .n { font-size: 1.9rem; font-weight: 700; color: var(--accent); }
+    .stat:nth-child(2) .n { color: var(--cyan); } .stat:nth-child(3) .n { color: var(--purple); }
+    .stat:nth-child(4) .n { color: var(--gold); } .stat:nth-child(5) .n { color: var(--green); }
+    .stat .l { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: 1px; }
+    section { margin: 54px 0; }
+    h2 { font-size: 1.5rem; border-left: 3px solid var(--accent); padding-left: 12px; }
+    pre { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 18px; overflow-x: auto; font-size: .9rem; }
+    code { color: var(--green); }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+    .card { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+    .card h3 { margin: 0 0 8px; color: var(--cyan); font-size: 1.02rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .9rem; }
+    footer { text-align: center; color: var(--muted); padding: 50px 20px; border-top: 1px solid var(--border); margin-top: 60px; font-size: .85rem; }
+    @media (max-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Ultimate Dev Toolkit</h1>
+      <p class="tagline">A modular, security-first universal developer toolkit for
+        <a href="https://claude.com/claude-code">Claude Code</a> — that detects what is
+        <em>really</em> installed and never pretends to support tools that are absent.</p>
+      <div class="badges">
+        <span class="badge">version <b>2.0.0</b></span>
+        <span class="badge">MIT licensed</span>
+        <span class="badge">honest tool detection</span>
+        <span class="badge">zero-dependency hooks</span>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/kaazyxx/ultimate-dev-toolkit">View on GitHub</a>
+        <a class="btn" href="https://github.com/kaazyxx/ultimate-dev-toolkit#-install">Install</a>
+        <a class="btn" href="https://github.com/kaazyxx/ultimate-dev-toolkit/releases/latest">Latest release</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="n">520</div><div class="l">skills</div></div>
+      <div class="stat"><div class="n">176</div><div class="l">commands</div></div>
+      <div class="stat"><div class="n">120</div><div class="l">agents</div></div>
+      <div class="stat"><div class="n">28</div><div class="l">hooks</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">connectors</div></div>
+    </div>
+
+    <section>
+      <h2>Install in 10 seconds</h2>
+      <p>Inside Claude Code (desktop, CLI or web), run:</p>
+      <pre><code>/plugin marketplace add kaazyxx/ultimate-dev-toolkit
+/plugin install ultimate-dev-toolkit</code></pre>
+      <p>Then run <code>/udt:doctor</code> to see exactly which tools and skills are live in your environment.</p>
+    </section>
+
+    <section>
+      <h2>What you get</h2>
+      <div class="grid">
+        <div class="card"><h3>520 skills</h3><p>Auto-loading expertise across 70+ languages, every major framework, databases, DevOps, security, data/ML, AI/LLM, game &amp; graphics, web3, embedded and more.</p></div>
+        <div class="card"><h3>176 slash commands</h3><p>Namespaced, ready-to-run workflows: <code>/git:*</code>, <code>/db:*</code>, <code>/security:*</code>, <code>/qa:*</code>, <code>/ai:*</code>, <code>/k8s:*</code>, and dozens more.</p></div>
+        <div class="card"><h3>120 specialist agents</h3><p>Per-language reviewers, build-resolvers and auditors — security, performance, data-quality, LLM guardrails, resilience and beyond.</p></div>
+        <div class="card"><h3>28 safety hooks</h3><p>Advisory, never-block-by-default guards for destructive commands and secret writes, plus an audit trail and SessionStart auto-update.</p></div>
+        <div class="card"><h3>4 MCP connectors</h3><p>sequential-thinking · memory · filesystem · blender — wired in through the plugin manifest.</p></div>
+        <div class="card"><h3>Honest by design</h3><p>Never claims a tool is supported unless it is actually detected. Real, functional entries over fake ones.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Documentation</h2>
+      <p>Full reference lives in the repository:
+        <a href="https://github.com/kaazyxx/ultimate-dev-toolkit/blob/main/docs/installation.md">Installation</a> ·
+        <a href="https://github.com/kaazyxx/ultimate-dev-toolkit/blob/main/docs/skills.md">Skills</a> ·
+        <a href="https://github.com/kaazyxx/ultimate-dev-toolkit/blob/main/docs/commands.md">Commands</a> ·
+        <a href="https://github.com/kaazyxx/ultimate-dev-toolkit/blob/main/docs/agents.md">Agents</a> ·
+        <a href="https://github.com/kaazyxx/ultimate-dev-toolkit/blob/main/docs/security.md">Security</a>.</p>
+    </section>
+  </div>
+
+  <footer>
+    Built by <a href="https://github.com/kaazyxx">kaazyxx</a> · MIT ·
+    <a href="https://github.com/kaazyxx/ultimate-dev-toolkit">github.com/kaazyxx/ultimate-dev-toolkit</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kaazyxx.github.io/ultimate-dev-toolkit/sitemap.xml

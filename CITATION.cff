@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use Ultimate Dev Toolkit, please cite it."
+title: "Ultimate Dev Toolkit"
+abstract: "A modular, security-first universal developer toolkit for Claude Code: 520 skills, 176 slash commands, 120 specialist agents, 28 safety hooks and 4 MCP connectors."
+type: software
+authors:
+  - alias: kaazyxx
+    name: kaazyxx
+url: "https://github.com/kaazyxx/ultimate-dev-toolkit"
+repository-code: "https://github.com/kaazyxx/ultimate-dev-toolkit"
+license: MIT
+version: 2.0.0
+keywords:
+  - claude-code
+  - claude-code-plugin
+  - developer-tools
+  - mcp
+  - ai-agents
