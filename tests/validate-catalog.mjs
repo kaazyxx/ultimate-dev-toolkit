@@ -43,8 +43,8 @@ for (const c of commands) {
   cmdIds.add(id);
 }
 
-// Agents
-const agents = readJson(path.join(CATALOG, "agents.json"));
+// Agents (agents.json plus any agents*.json)
+const agents = glob("agents").flatMap(readJson);
 const agentNames = new Set();
 for (const a of agents) {
   check(!!a.name && !!a.description && !!a.body, `agent missing fields: ${a.name || "?"}`);

@@ -101,8 +101,8 @@ function renderAgent(a) {
 // ---------- load ----------
 const skills = globCatalog('skills').flatMap(readJson);
 const commands = globCatalog('commands').flatMap(readJson);
-const agentsFile = path.join(CATALOG, 'agents.json');
-const agents = fs.existsSync(agentsFile) ? readJson(agentsFile) : [];
+// Agents are loaded from agents.json plus any agents*.json (same as skills/commands).
+const agents = globCatalog('agents').flatMap(readJson);
 
 // ---------- validate ----------
 const errors = [];

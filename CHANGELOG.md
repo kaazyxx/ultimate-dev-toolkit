@@ -4,6 +4,20 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/) and
 [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-09-18
+
+### Added
+- Game & graphics skills: Unity, Unreal, Godot, Three.js, WebGL/shader programming, physics simulation, procedural generation, sprite animation, game audio, game networking, WebXR/AR-VR.
+- Web3 skills: ethers/viem, smart-contract testing, DeFi patterns, NFT metadata, wallet integration, blockchain indexing.
+- Embedded/IoT skills: Arduino, embedded C, RTOS firmware, MQTT, Raspberry Pi.
+- AI skills: MCP server dev, agent orchestration, vector databases, image generation, speech processing, OCR, function-calling.
+- Commands: web3 (compile/test/audit), ai (mcp-scaffold/prompt-test), embedded (flash/monitor), game (profile), dev (changelog/release/todos/deps-graph).
+- Agents: solidity-auditor, web3-reviewer, embedded-reviewer, shader-reviewer, game-reviewer, threejs-reviewer, unity-reviewer, mcp-server-builder.
+
+### Changed
+- Generator and validator now load agents from `agents*.json` (extensible like skills/commands).
+- Totals: **384 skills, 124 commands, 80 agents, 27 hooks, 4 connectors**.
+
 ## [1.0.0] - 2026-09-17
 
 ### Added

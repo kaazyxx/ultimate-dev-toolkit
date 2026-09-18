@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-18T14:38:54.336Z",
-  "skills": 353,
-  "commands": 112,
-  "agents": 72,
+  "generatedAt": "2026-09-18T15:51:32.878Z",
+  "skills": 384,
+  "commands": 124,
+  "agents": 80,
   "hooks": 27,
   "connectors": 4,
   "skillCategories": {
@@ -12,6 +12,10 @@
     "data-ml": 35,
     "databases": 23,
     "devops": 42,
+    "game-graphics": 13,
+    "web3": 6,
+    "embedded": 5,
+    "ai": 7,
     "architecture": 18,
     "quality": 13,
     "testing": 8,
