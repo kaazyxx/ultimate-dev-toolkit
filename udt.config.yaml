@@ -1,0 +1,41 @@
+# Ultimate Dev Toolkit configuration.
+# This file is advisory: it documents intended defaults and lets you toggle
+# skill groups. The security options are honored as guidance by the skills and
+# hooks; they are never silently disabled.
+
+plugin:
+  name: ultimate-dev-toolkit
+  version: 1.0.0
+
+security:
+  # Require explicit confirmation before destructive actions (delete, drop,
+  # force-push, prune). Strongly recommended: leave on.
+  confirmation_required: true
+  # Redact secrets (tokens, passwords, connection strings) from output/logs.
+  redact_secrets: true
+  # Append executed shell commands and session lifecycle to .udt/audit.log.
+  audit_log: true
+
+# Enable/disable whole skill groups. Skills also self-disable when their
+# required tools are not detected on the machine.
+skills:
+  core: true
+  engineering: true
+  languages: true
+  web: true
+  databases: true
+  devops: true
+  data_ml: true
+  security: true
+  platforms: true
+  tooling: true
+  architecture: true
+  quality: true
+  testing: true
+  automation: true
+  networking: true
+  design: true
+
+# Third-party extensions are discovered under extensions/. See extensions/README.md.
+extensions:
+  autodiscover: true

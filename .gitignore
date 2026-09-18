@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+# Logs and audit output produced by the toolkit at runtime
+.udt/
+*.log
+# OS noise
+.DS_Store
+Thumbs.db
+# Editor
+.vscode/
+.idea/

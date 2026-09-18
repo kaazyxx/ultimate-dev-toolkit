@@ -1,0 +1,21 @@
+{
+  "name": "ultimate-dev-toolkit-marketplace",
+  "owner": {
+    "name": "kaazuxx77-ctrl",
+    "url": "https://github.com/kaazuxx77-ctrl"
+  },
+  "metadata": {
+    "description": "Marketplace entry for the Ultimate Dev Toolkit Claude Code plugin.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "ultimate-dev-toolkit",
+      "source": "./",
+      "description": "Universal, security-first developer toolkit: environment-aware skills, categorized slash commands, specialist agents and safety hooks.",
+      "version": "1.0.0",
+      "category": "developer-tools",
+      "keywords": ["developer-tools", "devops", "code-analysis", "git", "docker", "security", "testing"]
+    }
+  ]
+}

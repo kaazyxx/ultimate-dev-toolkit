@@ -1,0 +1,8 @@
+{
+  "name": "udt-example-extension",
+  "version": "1.0.0",
+  "description": "A minimal, working example UDT extension: one skill that greets and explains the extension mechanism.",
+  "author": { "name": "Your Name" },
+  "license": "MIT",
+  "keywords": ["udt", "extension", "example"]
+}

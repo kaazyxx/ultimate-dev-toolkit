@@ -1,0 +1,461 @@
+[
+  {
+    "name": "environment-detection",
+    "category": "core",
+    "description": "Detect the real OS, CPU, runtimes, compilers, package managers, containers, databases and project type before doing anything. Use at the start of any task so capabilities reflect what is actually installed.",
+    "summary": "The honesty layer of UDT: never claim a tool or language is supported unless a real probe proves it is present.",
+    "whenToUse": [
+      "At the start of any non-trivial task, to know what is installable/runnable",
+      "Before a command declares support for a language, runtime or tool",
+      "When the user asks 'what can this project use?' or runs /udt:doctor"
+    ],
+    "tools": ["node", "git"],
+    "workflow": [
+      "Identify the OS/arch (uname -a on POSIX; $PSVersionTable + [Environment]::OSVersion on Windows).",
+      "Probe each candidate tool by running its version flag and capturing exit code + output.",
+      "Detect the project: read package.json / pyproject.toml / Cargo.toml / go.mod / pom.xml, lockfiles and config files.",
+      "Infer primary language, framework, package manager and build system from what was found — not from guesses.",
+      "Report a capability table: available (with version) / missing (with install hint)."
+    ],
+    "commands": [
+      "node --version && npm --version",
+      "git --version",
+      "python --version 2>&1 || python3 --version",
+      "docker version --format '{{.Server.Version}}' 2>&1",
+      "rustc --version; go version; java -version 2>&1"
+    ],
+    "checklist": [
+      "Every 'supported' claim is backed by a successful version probe",
+      "Missing tools are reported with an install hint, not silently ignored",
+      "Project type is inferred from real manifest/lockfiles present on disk"
+    ],
+    "pitfalls": [
+      "Assuming a tool exists because the project mentions it — always probe",
+      "Confusing python vs python3, or node installed vs the right version",
+      "Treating a non-zero exit code as 'installed' — check both exit code and output"
+    ],
+    "bodyMd": "## Detection matrix (probe, don't assume)\n\n| Layer | Probe | Present when |\n| --- | --- | --- |\n| Runtime | `node -v`, `python --version`, `ruby -v`, `php -v` | exit 0 + version string |\n| Compiler | `gcc --version`, `clang --version`, `rustc --version`, `go version` | exit 0 |\n| JVM/.NET | `java -version`, `dotnet --info` | exit 0 |\n| Package mgr | `npm`, `pnpm`, `yarn`, `pip`, `cargo`, `maven`, `gradle` | binary resolves |\n| Container | `docker version`, `podman version` | daemon reachable |\n| VCS | `git --version` | exit 0 |\n| DB client | `psql --version`, `mysql --version`, `sqlite3 --version`, `redis-cli --version`, `mongosh --version` | exit 0 |\n\nThe `/udt:doctor` command drives this via `scripts/detect-tools.js`, which returns machine-readable JSON.",
+    "related": ["safe-execution", "command-registry"]
+  },
+  {
+    "name": "safe-execution",
+    "category": "core",
+    "description": "The security contract every UDT action passes through: validate arguments, block path traversal, avoid shell injection, redact secrets, require confirmation for destructive operations, and keep an audit trail. Use whenever a command runs a shell process or touches the filesystem.",
+    "summary": "Security is never disabled to make a command more powerful. Destructive actions always ask first.",
+    "whenToUse": [
+      "Before running any shell command constructed from user input",
+      "Before deleting, overwriting, force-pushing, dropping or pruning anything",
+      "Whenever output could contain secrets (tokens, passwords, connection strings)"
+    ],
+    "tools": [],
+    "workflow": [
+      "Validate and normalize arguments; reject unexpected shapes early.",
+      "Resolve and canonicalize paths; refuse paths that escape the project root unless explicitly allowed.",
+      "Prefer argv-style execution (arrays) over shell string concatenation to avoid injection.",
+      "Classify the action; if destructive, print exactly what will happen and require explicit confirmation.",
+      "Redact secrets from any printed or logged output; append an entry to .udt/audit.log."
+    ],
+    "checklist": [
+      "No user string is concatenated directly into a shell command line",
+      "Every destructive action showed a preview and got a yes",
+      "Secrets are masked in all output and logs"
+    ],
+    "pitfalls": [
+      "Building commands via string interpolation instead of argument arrays",
+      "Following relative paths blindly across symlinks or ..",
+      "Echoing an environment variable or connection string that holds a credential"
+    ],
+    "bodyMd": "## Destructive operations (always confirm)\n\nTreat these as high-risk and require an explicit yes, showing the exact target first:\n\n- Filesystem: recursive delete, overwrite of existing files, moving over an existing target\n- Git: reset --hard, clean -fd, force push, branch deletion, history rewrite\n- Database: DROP, TRUNCATE, DELETE/UPDATE without a WHERE, destructive migrations\n- Containers: system prune, volume removal, image force-removal\n- System: killing processes, changing permissions/ownership, editing PATH or security settings\n\n## Confirmation format\n\n```\n! This action may be destructive.\nTarget: <exact path / command / rows affected>\nEffect: <what changes, what is lost>\nProceed? [y/N]\n```\n\nProhibited outright (ask the user to do it themselves): entering credentials, executing fund transfers, disabling security controls, bypassing bot-detection.",
+    "related": ["environment-detection", "security-audit", "file-operations"]
+  },
+  {
+    "name": "command-registry",
+    "category": "core",
+    "description": "The single source of truth for every UDT command: how they are named, discovered, documented and searched. Use to list, search or explain available commands, or when adding a new one.",
+    "summary": "Commands are files under commands/<category>/<name>.md, invoked as /<category>:<name>; the registry keeps naming and help consistent.",
+    "whenToUse": [
+      "When the user asks what commands exist or what a command does",
+      "When adding, renaming or documenting a command",
+      "To keep naming conventions consistent (/<category>:<verb>)"
+    ],
+    "tools": ["node"],
+    "workflow": [
+      "List commands by scanning commands/ subfolders and reading their frontmatter.",
+      "Search by matching the query against category, name and description.",
+      "Explain a command by rendering its description, arguments and examples.",
+      "For a new command, follow /<category>:<verb> naming and add examples + argument-hint."
+    ],
+    "commands": [
+      "node scripts/build-catalog.mjs   # regenerate commands + docs from catalog"
+    ],
+    "checklist": [
+      "Command id follows /<category>:<verb>",
+      "Frontmatter has description and argument-hint",
+      "At least one example is provided"
+    ],
+    "pitfalls": [
+      "Naming a command 'help' (collides with the built-in) — use /udt:help",
+      "Duplicated command ids across categories"
+    ],
+    "related": ["environment-detection", "pipelines"]
+  },
+  {
+    "name": "pipelines",
+    "category": "core",
+    "description": "Chain commands into an ordered pipeline (e.g. analyze then test then fix then format then build) with dependencies, error handling, retries, timeouts, conditional and parallel steps. Use for multi-step automation.",
+    "summary": "Compose existing commands into a repeatable, fail-safe sequence with clear per-step logs.",
+    "whenToUse": [
+      "When a task is several commands that should run in a defined order",
+      "When some steps may run in parallel or only if a previous step succeeded",
+      "To make a repeatable workflow (CI-like) out of ad-hoc steps"
+    ],
+    "tools": [],
+    "workflow": [
+      "Declare steps with explicit dependencies (a DAG).",
+      "For each step set: on-error (stop/continue), retries, timeout, and an optional condition.",
+      "Run independent steps in parallel where safe; serialize where there is a data dependency.",
+      "Capture per-step logs and a final status summary; stop the pipeline on a hard failure."
+    ],
+    "checklist": [
+      "Each step has a clear success/failure signal",
+      "Destructive steps still honor safe-execution confirmation",
+      "Failures surface the failing step and its log, not just 'failed'"
+    ],
+    "pitfalls": [
+      "Hiding a failed step behind a later success",
+      "Parallelizing steps that share mutable state",
+      "Unbounded retries with no timeout"
+    ],
+    "related": ["command-registry", "ci-cd", "testing-strategy"]
+  },
+  {
+    "name": "code-analysis",
+    "category": "engineering",
+    "description": "Understand an unfamiliar codebase: map structure, entry points, dependencies, hotspots, complexity and risky areas before changing anything. Use when onboarding to a repo or scoping a change.",
+    "summary": "Build an accurate mental model of a project from real files, not assumptions.",
+    "whenToUse": [
+      "Before editing an unfamiliar codebase",
+      "When scoping the blast radius of a change",
+      "To locate entry points, config and the highest-churn/most-complex files"
+    ],
+    "tools": ["git", "node"],
+    "workflow": [
+      "Detect language/framework/build system (see environment-detection).",
+      "Map the directory tree and identify entry points and configuration files.",
+      "Trace key dependencies inward from the entry point.",
+      "Flag complexity/risk: large files, deep nesting, TODO/FIXME, high git churn.",
+      "Summarize architecture and the safest place to make the requested change."
+    ],
+    "commands": [
+      "git ls-files | wc -l",
+      "git log --format= --name-only --since='90 days ago' | sort | uniq -c | sort -rn | head"
+    ],
+    "checklist": [
+      "Entry points and build system identified",
+      "Change location chosen from real dependency tracing",
+      "Risk areas (churn, complexity) noted"
+    ],
+    "pitfalls": [
+      "Guessing architecture from folder names alone",
+      "Ignoring generated/vendored code as if it were source"
+    ],
+    "related": ["refactoring", "debugging", "documentation-writer"]
+  },
+  {
+    "name": "debugging",
+    "category": "engineering",
+    "description": "Systematically diagnose a specific failure: reproduce, isolate, form and test hypotheses, and find the root cause rather than patching symptoms. Use when given an error, stack trace or misbehavior.",
+    "summary": "Root-cause first. A fix without a reproduction is a guess.",
+    "whenToUse": [
+      "When there is a concrete error, stack trace, crash or wrong output",
+      "When a test is failing and the cause is unclear",
+      "Before applying a fix, to confirm you understand why it broke"
+    ],
+    "tools": ["git"],
+    "workflow": [
+      "Reproduce the failure reliably; capture exact input, environment and output.",
+      "Read the full error/stack; identify the first point where reality diverges from intent.",
+      "Form the smallest hypothesis that explains it; test it with a targeted probe or log.",
+      "Narrow with bisection (git bisect, binary search in code, minimal repro).",
+      "Fix the root cause, then re-run the reproduction to confirm and add a regression test."
+    ],
+    "commands": [
+      "git bisect start && git bisect bad && git bisect good <known-good-sha>"
+    ],
+    "checklist": [
+      "Failure reproduced before fixing",
+      "Root cause identified, not just the symptom",
+      "Regression test added"
+    ],
+    "pitfalls": [
+      "Changing code randomly until the error disappears",
+      "Fixing the symptom (swallowing the exception) instead of the cause"
+    ],
+    "related": ["testing-strategy", "code-analysis", "observability"]
+  },
+  {
+    "name": "refactoring",
+    "category": "engineering",
+    "description": "Improve code structure without changing behavior: extract, rename, deduplicate, simplify and reduce complexity under the safety net of tests. Use when code is hard to read or change but works.",
+    "summary": "Behavior-preserving change, verified green before and after.",
+    "whenToUse": [
+      "When code works but is hard to read, test or extend",
+      "Before adding a feature to a messy area (refactor first, then add)",
+      "To remove duplication or reduce complexity"
+    ],
+    "tools": ["git"],
+    "workflow": [
+      "Confirm tests exist and pass (or add characterization tests first).",
+      "Make one small, behavior-preserving change at a time.",
+      "Re-run tests after each step; keep the diff reviewable.",
+      "Commit in small logical steps so any regression is easy to bisect."
+    ],
+    "checklist": [
+      "Tests green before starting and after each step",
+      "No behavior change intended or observed",
+      "Each commit is one coherent transformation"
+    ],
+    "pitfalls": [
+      "Refactoring and adding features in the same commit",
+      "Large sweeping rewrites with no test coverage"
+    ],
+    "related": ["testing-strategy", "code-analysis", "code-review-playbook"]
+  },
+  {
+    "name": "code-generation",
+    "category": "engineering",
+    "description": "Generate new code that matches the project's existing conventions, patterns and dependencies rather than a generic template. Use when scaffolding modules, functions, endpoints or tests.",
+    "summary": "New code should read like the surrounding code — same idioms, naming and libraries.",
+    "whenToUse": [
+      "When creating a new module, component, endpoint or test file",
+      "When adding a function that must fit existing patterns",
+      "To scaffold boilerplate consistent with the repo"
+    ],
+    "tools": [],
+    "workflow": [
+      "Read nearby files to learn naming, structure, error handling and imports.",
+      "Reuse existing utilities and libraries instead of introducing new ones.",
+      "Generate the minimal code that satisfies the request; wire it in.",
+      "Add or update tests and run them."
+    ],
+    "checklist": [
+      "Matches existing conventions and file layout",
+      "No unnecessary new dependency introduced",
+      "Compiles/lints/tests pass"
+    ],
+    "pitfalls": [
+      "Introducing a new framework/style inconsistent with the repo",
+      "Generating code that is never wired up or tested"
+    ],
+    "related": ["code-analysis", "testing-strategy", "documentation-writer"]
+  },
+  {
+    "name": "documentation-writer",
+    "category": "engineering",
+    "description": "Write and update accurate documentation: READMEs, API docs, docstrings, ADRs and guides derived from the real code and behavior. Use when documenting a project or change.",
+    "summary": "Docs must match the code as it is, not as it was imagined.",
+    "whenToUse": [
+      "When a project lacks a README or setup/usage docs",
+      "After a change that alters public behavior or interfaces",
+      "To capture an architectural decision (ADR)"
+    ],
+    "tools": [],
+    "workflow": [
+      "Read the actual code/exports/routes/config being documented.",
+      "Write for the reader's task: install, use, extend, troubleshoot.",
+      "Include runnable examples that you have reason to believe work.",
+      "Keep it close to the source so it stays in sync."
+    ],
+    "checklist": [
+      "Every command/example reflects real, current behavior",
+      "Setup steps actually get a new user running",
+      "No stale references to removed files/flags"
+    ],
+    "pitfalls": [
+      "Documenting intended behavior instead of actual behavior",
+      "Examples that were never run and silently break"
+    ],
+    "related": ["code-analysis", "code-generation"]
+  },
+  {
+    "name": "testing-strategy",
+    "category": "engineering",
+    "description": "Choose and apply the right tests (unit, integration, e2e, property, snapshot) and detect the project's real test framework and coverage tooling. Use when adding tests or deciding what to test.",
+    "summary": "Test behavior and edge cases, at the cheapest level that gives confidence.",
+    "whenToUse": [
+      "When adding tests for new or changed code",
+      "When a bug needs a regression test",
+      "To decide unit vs integration vs e2e for a given risk"
+    ],
+    "tools": ["node"],
+    "workflow": [
+      "Detect the test framework and runner from the project (jest/vitest/pytest/go test/cargo test/etc.).",
+      "Write the cheapest test that proves the behavior; add edge cases and failure paths.",
+      "Run the suite; verify the new test fails without the fix and passes with it.",
+      "Check coverage of the changed lines, not just the global number."
+    ],
+    "commands": [
+      "npm test --silent",
+      "pytest -q",
+      "go test ./... && cargo test"
+    ],
+    "checklist": [
+      "Framework detected, not assumed",
+      "New behavior and its edge cases covered",
+      "Regression test fails before the fix"
+    ],
+    "pitfalls": [
+      "Testing implementation details instead of behavior",
+      "Chasing a coverage percentage with meaningless tests"
+    ],
+    "related": ["debugging", "refactoring", "ci-cd"]
+  },
+  {
+    "name": "file-operations",
+    "category": "core",
+    "description": "Safely read, search, compare, move, copy, rename, convert, compress, hash and inspect files and their metadata, with confirmation before destructive changes. Use for filesystem tasks.",
+    "summary": "Filesystem work with path-traversal checks and confirmation before anything is lost.",
+    "whenToUse": [
+      "When searching, converting, comparing or bulk-processing files",
+      "When moving/renaming/deleting where data could be lost",
+      "To detect a file's real type, hash or metadata"
+    ],
+    "tools": ["node"],
+    "workflow": [
+      "Resolve paths to absolute + canonical; refuse escapes outside the allowed root.",
+      "For reads/searches, stream large files instead of loading them whole.",
+      "For destructive ops, preview the exact targets and confirm.",
+      "Detect type by content (magic bytes) when the extension is unreliable."
+    ],
+    "commands": [
+      "certutil -hashfile <file> SHA256   # Windows",
+      "sha256sum <file>                   # POSIX"
+    ],
+    "checklist": [
+      "No path escapes the intended root",
+      "Destructive change previewed and confirmed",
+      "Large files streamed, not slurped"
+    ],
+    "pitfalls": [
+      "Trusting the file extension for type detection",
+      "Overwriting a target during move/copy without checking it exists"
+    ],
+    "related": ["safe-execution", "security-audit"]
+  },
+  {
+    "name": "observability",
+    "category": "engineering",
+    "description": "Make a running system legible: structured logs, metrics, traces, and process/resource monitoring, plus turning raw errors into actionable diagnostics. Use when investigating production or performance issues.",
+    "summary": "You cannot fix what you cannot see — add signal before guessing.",
+    "whenToUse": [
+      "When diagnosing a live issue with poor visibility",
+      "When errors are vague and need better context",
+      "To monitor CPU/memory/IO/network of a process under load"
+    ],
+    "tools": [],
+    "workflow": [
+      "Identify the signal you lack (log, metric, trace) and add the minimal instrumentation.",
+      "Prefer structured logs with correlation ids over free-text prints.",
+      "Reproduce under monitoring; correlate the symptom with resource/latency data.",
+      "Turn the finding into a permanent metric/alert if it can recur."
+    ],
+    "checklist": [
+      "Logs are structured and correlatable",
+      "The measured signal actually explains the symptom",
+      "No secret leaks into logs/traces"
+    ],
+    "pitfalls": [
+      "Logging secrets or PII",
+      "Adding noisy logs that drown the signal"
+    ],
+    "related": ["debugging", "performance-profiling"]
+  },
+  {
+    "name": "project-scaffolding",
+    "category": "engineering",
+    "description": "Bootstrap a new project or module with a sensible, conventional structure, config, tooling and CI for the chosen stack. Use when starting something new.",
+    "summary": "Start with the layout, tooling and guardrails the ecosystem expects.",
+    "whenToUse": [
+      "When creating a new project or service from scratch",
+      "When adding a new package/module to a monorepo",
+      "To set up linting, formatting, tests and CI early"
+    ],
+    "tools": [],
+    "workflow": [
+      "Pick the stack and confirm the required tools are installed.",
+      "Use the ecosystem's official scaffolder where one exists (create-*, cargo new, dotnet new...).",
+      "Add linting, formatting, tests and a minimal CI workflow.",
+      "Write a README that gets a new dev running."
+    ],
+    "checklist": [
+      "Conventional structure for the stack",
+      "Lint/format/test wired from day one",
+      "README with working setup steps"
+    ],
+    "pitfalls": [
+      "Reinventing a bespoke layout the ecosystem does not expect",
+      "Deferring tests/CI until the project is already messy"
+    ],
+    "related": ["code-generation", "ci-cd", "documentation-writer"]
+  },
+  {
+    "name": "code-review-playbook",
+    "category": "engineering",
+    "description": "Review a diff for correctness, security, performance and maintainability with prioritized, actionable feedback. Use before merging changes or when asked to review code.",
+    "summary": "Find real defects first; style last. Every comment should be actionable.",
+    "whenToUse": [
+      "Before merging a change or PR",
+      "When asked to review code you or someone else wrote",
+      "As the final gate after implementing a feature"
+    ],
+    "tools": ["git"],
+    "workflow": [
+      "Read the diff in the context of the surrounding code, not in isolation.",
+      "Check correctness and edge cases first, then security, then performance, then clarity.",
+      "Verify tests cover the change and actually exercise the new behavior.",
+      "Give prioritized feedback: blocking issues vs. suggestions."
+    ],
+    "commands": [
+      "git diff --stat",
+      "git diff main...HEAD"
+    ],
+    "checklist": [
+      "Correctness/edge cases reviewed before style",
+      "Security-sensitive paths scrutinized",
+      "Tests present and meaningful"
+    ],
+    "pitfalls": [
+      "Bikeshedding formatting while missing a logic bug",
+      "Approving code with no test for the new behavior"
+    ],
+    "related": ["security-audit", "testing-strategy", "refactoring"]
+  },
+  {
+    "name": "performance-profiling",
+    "category": "engineering",
+    "description": "Find and fix real performance bottlenecks with measurement (profiling, benchmarks) rather than guesswork, covering CPU, memory, IO and algorithmic complexity. Use when something is slow.",
+    "summary": "Measure first. Optimize the proven hotspot, then measure again.",
+    "whenToUse": [
+      "When code, a build or a request is measurably slow",
+      "Before optimizing, to locate the actual bottleneck",
+      "To catch memory leaks or accidental O(n^2) paths"
+    ],
+    "tools": [],
+    "workflow": [
+      "Reproduce the slow path with a repeatable benchmark.",
+      "Profile to find where time/memory actually goes (do not guess).",
+      "Fix the dominant cost (often algorithmic or IO, not micro-optimizations).",
+      "Re-benchmark to prove the improvement; guard it with a perf test if it matters."
+    ],
+    "checklist": [
+      "Bottleneck identified by measurement",
+      "Improvement proven by before/after numbers",
+      "No correctness regression introduced"
+    ],
+    "pitfalls": [
+      "Micro-optimizing code that is not the bottleneck",
+      "Optimizing without a baseline measurement"
+    ],
+    "related": ["observability", "benchmarking", "debugging"]
+  }
+]

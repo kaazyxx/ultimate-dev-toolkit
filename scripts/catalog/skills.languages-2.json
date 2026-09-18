@@ -1,0 +1,200 @@
+[
+  {
+    "name": "java",
+    "category": "languages",
+    "description": "Write, build and test Java (Maven/Gradle), Spring Boot or plain JVM. Use for .java files, pom.xml/build.gradle projects and Java build errors.",
+    "summary": "Idiomatic, well-tested Java built with Maven or Gradle.",
+    "tools": ["java", "javac", "mvn", "gradle"],
+    "commands": ["mvn -q verify", "gradle build", "java -version"],
+    "checklist": ["Build tool detected (Maven vs Gradle)", "Null-safety and resource closing (try-with-resources)", "Tests (JUnit) green"],
+    "pitfalls": ["NullPointerExceptions from unchecked returns", "Leaking resources without try-with-resources", "Mutable static state"],
+    "related": ["kotlin", "backend-spring", "testing-strategy"]
+  },
+  {
+    "name": "kotlin",
+    "category": "languages",
+    "description": "Write, build and test Kotlin (JVM/Android/Multiplatform): null-safety, coroutines, data classes. Use for .kt files and Gradle Kotlin projects.",
+    "summary": "Null-safe, coroutine-aware Kotlin.",
+    "tools": ["kotlinc", "gradle", "ktlint"],
+    "commands": ["gradle build", "ktlint", "gradle test"],
+    "checklist": ["Nullability modeled with types, not !!", "Coroutine scopes/cancellation handled", "ktlint clean"],
+    "pitfalls": ["!! non-null assertions hiding NPEs", "Launching coroutines in the wrong scope (leaks)", "Blocking calls on the main dispatcher"],
+    "related": ["java", "mobile-android", "backend-spring"]
+  },
+  {
+    "name": "scala",
+    "category": "languages",
+    "description": "Write and build Scala (sbt) with functional and typed patterns. Use for .scala files and build.sbt projects. Detect sbt/scala before claiming support.",
+    "summary": "Typed, functional Scala built with sbt.",
+    "tools": ["scala", "sbt", "scalafmt"],
+    "commands": ["sbt compile", "sbt test", "scalafmt --test"],
+    "checklist": ["Effects and errors modeled explicitly", "Implicits/givens kept discoverable", "scalafmt clean"],
+    "pitfalls": ["Implicit resolution surprises", "Overly clever type-level code hurting readability"],
+    "related": ["java", "haskell", "backend-spring"]
+  },
+  {
+    "name": "groovy",
+    "category": "languages",
+    "description": "Read and write Groovy, including Gradle build scripts and Jenkins pipelines. Use for .groovy files and Jenkinsfile.",
+    "summary": "Dynamic JVM scripting for builds and pipelines.",
+    "tools": ["groovy", "gradle"],
+    "commands": ["groovy script.groovy", "gradle tasks"],
+    "checklist": ["Pipeline steps idempotent", "Secrets from credentials store, not literals", "Gradle logic kept declarative where possible"],
+    "pitfalls": ["Dynamic typing errors surfacing only at runtime", "Hardcoded secrets in Jenkinsfiles"],
+    "related": ["java", "ci-cd-jenkins", "gradle-build-tool"]
+  },
+  {
+    "name": "clojure",
+    "category": "languages",
+    "description": "Write and run Clojure/ClojureScript with a REPL-driven workflow and immutable data. Use for .clj/.cljs files and deps.edn/project.clj. Detect clojure/lein first.",
+    "summary": "REPL-driven, immutable, functional Lisp on the JVM.",
+    "tools": ["clojure", "clj", "lein"],
+    "commands": ["clj -M:test", "lein test", "clojure -M -e \"(println :ok)\""],
+    "checklist": ["Pure functions; side effects at the edges", "Specs/validation on external data", "REPL used to verify small pieces"],
+    "pitfalls": ["Laziness causing side effects at unexpected times", "Overusing atoms/global mutable state"],
+    "related": ["lisp-scheme", "scala", "functional-programming"]
+  },
+  {
+    "name": "swift",
+    "category": "languages",
+    "description": "Write, build and test Swift (SwiftPM, iOS/macOS): optionals, value types, protocols, concurrency. Use for .swift files and Package.swift. Detect swift/xcodebuild first.",
+    "summary": "Safe, value-oriented Swift with structured concurrency.",
+    "tools": ["swift", "swiftformat", "xcodebuild"],
+    "commands": ["swift build", "swift test", "swiftformat --lint ."],
+    "checklist": ["Optionals unwrapped safely (no force unwrap in prod)", "Value semantics preferred; reference cycles avoided", "async/await used over completion soup"],
+    "pitfalls": ["Force-unwrapping optionals causing crashes", "Retain cycles from strong self captures", "Blocking the main actor"],
+    "related": ["objective-c", "mobile-ios", "swiftui-patterns"]
+  },
+  {
+    "name": "objective-c",
+    "category": "languages",
+    "description": "Read, write and maintain Objective-C with ARC and Cocoa patterns. Use for .m/.h Apple sources. Detect clang/xcodebuild first.",
+    "summary": "ARC-managed Objective-C interoperating with Swift.",
+    "tools": ["clang", "xcodebuild"],
+    "commands": ["xcodebuild -list", "clang -fobjc-arc -c file.m"],
+    "checklist": ["ARC ownership qualifiers correct", "No retain cycles in blocks (weakSelf)", "Nullability annotations for Swift interop"],
+    "pitfalls": ["Retain cycles capturing self in blocks", "Messaging nil silently returning zero"],
+    "related": ["swift", "mobile-ios", "c"]
+  },
+  {
+    "name": "csharp",
+    "category": "languages",
+    "description": "Write, build and test C# (.NET): async/await, LINQ, nullable reference types. Use for .cs files, .csproj/.sln projects and .NET build errors.",
+    "summary": "Modern, nullable-aware, async-correct C#.",
+    "tools": ["dotnet"],
+    "commands": ["dotnet build", "dotnet test", "dotnet format --verify-no-changes"],
+    "checklist": ["Nullable reference types enabled", "async all the way (no .Result/.Wait deadlocks)", "IDisposable disposed (using)"],
+    "pitfalls": ["Blocking on async with .Result causing deadlocks", "Ignoring nullable warnings", "LINQ multiple-enumeration"],
+    "related": ["fsharp", "backend-dotnet", "testing-strategy"]
+  },
+  {
+    "name": "fsharp",
+    "category": "languages",
+    "description": "Write and build F# (.NET): immutability, discriminated unions, pattern matching, computation expressions. Use for .fs/.fsx files.",
+    "summary": "Functional-first .NET with exhaustive pattern matching.",
+    "tools": ["dotnet"],
+    "commands": ["dotnet build", "dotnet fsi script.fsx", "dotnet test"],
+    "checklist": ["Domain modeled with DUs; make illegal states unrepresentable", "Pattern matches exhaustive", "Side effects isolated"],
+    "pitfalls": ["Incomplete match warnings ignored", "Overusing mutable/imperative escape hatches"],
+    "related": ["csharp", "haskell", "ocaml"]
+  },
+  {
+    "name": "vbnet",
+    "category": "languages",
+    "description": "Read and maintain VB.NET (.NET) code. Use for .vb files and legacy .NET projects. Detect dotnet before claiming support.",
+    "summary": "Maintainable VB.NET interoperating with the .NET ecosystem.",
+    "tools": ["dotnet"],
+    "commands": ["dotnet build", "dotnet test"],
+    "checklist": ["Option Strict On", "Nullability handled explicitly", "Async patterns not blocked"],
+    "pitfalls": ["Option Strict Off allowing silent conversions", "Legacy On Error Resume Next hiding failures"],
+    "related": ["csharp", "backend-dotnet"]
+  },
+  {
+    "name": "haskell",
+    "category": "languages",
+    "description": "Write and build Haskell (Cabal/Stack): purity, types, type classes, laziness. Use for .hs files and .cabal/stack.yaml. Detect ghc/cabal/stack first.",
+    "summary": "Pure, strongly typed Haskell with effects at the edges.",
+    "tools": ["ghc", "cabal", "stack", "hlint"],
+    "commands": ["cabal build", "stack build", "hlint .", "cabal test"],
+    "checklist": ["Effects in IO, purity elsewhere", "Total functions; partial functions avoided", "hlint suggestions considered"],
+    "pitfalls": ["Space leaks from laziness", "Partial functions (head/fromJust) crashing", "Overengineered type-level code"],
+    "related": ["ocaml", "fsharp", "functional-programming"]
+  },
+  {
+    "name": "ocaml",
+    "category": "languages",
+    "description": "Write and build OCaml (Dune/opam): modules, variants, pattern matching. Use for .ml/.mli files and dune-project. Detect ocaml/dune first.",
+    "summary": "Fast, typed functional OCaml built with Dune.",
+    "tools": ["ocaml", "dune", "opam"],
+    "commands": ["dune build", "dune runtest", "dune fmt"],
+    "checklist": ["Interfaces (.mli) constrain modules", "Matches exhaustive", "opam switch pinned"],
+    "pitfalls": ["Ignoring incomplete-match warnings", "Mixing mutable refs with functional style carelessly"],
+    "related": ["haskell", "fsharp", "rust"]
+  },
+  {
+    "name": "elixir",
+    "category": "languages",
+    "description": "Write, test and build Elixir (Mix, OTP, Phoenix): processes, supervision, immutability. Use for .ex/.exs files and mix.exs. Detect elixir/mix first.",
+    "summary": "Concurrent, fault-tolerant Elixir on the BEAM.",
+    "tools": ["elixir", "mix"],
+    "commands": ["mix deps.get", "mix test", "mix format --check-formatted", "mix credo"],
+    "checklist": ["Supervision tree designed for failure", "Pattern matching over conditionals", "credo/format clean"],
+    "pitfalls": ["Doing heavy work in a single process (bottleneck)", "Unsupervised processes leaking on crash"],
+    "related": ["erlang", "backend-phoenix", "functional-programming"]
+  },
+  {
+    "name": "erlang",
+    "category": "languages",
+    "description": "Write and build Erlang/OTP: actors, supervision, hot code. Use for .erl files and rebar3 projects. Detect erl/rebar3 first.",
+    "summary": "Battle-tested concurrent Erlang/OTP.",
+    "tools": ["erl", "rebar3"],
+    "commands": ["rebar3 compile", "rebar3 eunit", "rebar3 dialyzer"],
+    "checklist": ["OTP behaviours used (gen_server/supervisor)", "Dialyzer type checks pass", "Let-it-crash with proper supervision"],
+    "pitfalls": ["Unsupervised processes", "Blocking a gen_server on long work"],
+    "related": ["elixir", "functional-programming"]
+  },
+  {
+    "name": "lisp-scheme",
+    "category": "languages",
+    "description": "Write and run Common Lisp or Scheme (Racket/Guile): macros, recursion, REPL. Use for .lisp/.scm/.rkt files. Detect sbcl/racket/guile first.",
+    "summary": "Macro-powered, REPL-driven Lisp/Scheme.",
+    "tools": ["sbcl", "racket", "guile"],
+    "commands": ["sbcl --script file.lisp", "racket file.rkt", "guile file.scm"],
+    "checklist": ["Macros hygienic and justified", "Tail recursion where growth matters", "REPL used to verify pieces"],
+    "pitfalls": ["Unhygienic macros capturing variables", "Non-tail recursion blowing the stack"],
+    "related": ["clojure", "functional-programming"]
+  },
+  {
+    "name": "shell-bash",
+    "category": "languages",
+    "description": "Write robust, portable Bash/POSIX shell scripts with strict mode and shellcheck. Use for .sh files and shell one-liners on POSIX systems.",
+    "summary": "Safe Bash: strict mode, quoted expansions, shellcheck clean.",
+    "tools": ["bash", "shellcheck", "shfmt"],
+    "commands": ["shellcheck script.sh", "shfmt -d script.sh", "bash -n script.sh"],
+    "checklist": ["set -euo pipefail at top", "All variable expansions quoted", "shellcheck clean"],
+    "pitfalls": ["Unquoted $var causing word-splitting/globbing", "Parsing ls output", "Ignoring non-zero exit in pipelines"],
+    "related": ["shell-powershell", "automation-scripting", "safe-execution"]
+  },
+  {
+    "name": "shell-powershell",
+    "category": "languages",
+    "description": "Write PowerShell (5.1 and 7+) scripts and cmdlets with proper error handling and object pipelines. Use for .ps1/.psm1 files on Windows or cross-platform pwsh.",
+    "summary": "Object-pipeline PowerShell with real error handling.",
+    "tools": ["pwsh", "powershell", "PSScriptAnalyzer"],
+    "commands": ["pwsh -NoProfile -File script.ps1", "Invoke-ScriptAnalyzer -Path script.ps1"],
+    "checklist": ["$ErrorActionPreference and try/catch used", "Objects passed, not text-parsed", "Approved Verb-Noun cmdlet names"],
+    "pitfalls": ["Assuming 5.1 vs 7 feature parity", "Silent failures from -ErrorAction SilentlyContinue", "Native stderr redirection quirks in 5.1"],
+    "related": ["shell-bash", "automation-scripting", "windows-admin"]
+  },
+  {
+    "name": "fish",
+    "category": "languages",
+    "description": "Write Fish shell scripts and functions. Use for .fish files and config.fish. Detect the fish binary before executing.",
+    "summary": "Ergonomic Fish scripting (note: not POSIX-compatible).",
+    "tools": ["fish"],
+    "commands": ["fish -n script.fish", "fish script.fish"],
+    "checklist": ["Fish syntax (not bash) used", "Functions and completions organized", "Portability limits acknowledged"],
+    "pitfalls": ["Copying bash syntax that fish rejects", "Assuming POSIX behavior"],
+    "related": ["shell-bash", "automation-scripting"]
+  }
+]

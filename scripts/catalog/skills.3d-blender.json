@@ -1,0 +1,76 @@
+[
+  {
+    "name": "texture-3d",
+    "category": "3d-graphics",
+    "description": "Create and apply 3D textures and PBR materials: albedo/base-color, normal, roughness, metallic, ambient-occlusion, height/displacement and emission maps, UV unwrapping, texture baking and texel density. Use for 3D texturing, material authoring, and texture sets (.png/.exr/.hdr). Detect Blender/ImageMagick before claiming you can bake or process maps.",
+    "summary": "Author correct PBR texture sets and materials, with UVs, baking and sane texel density.",
+    "whenToUse": [
+      "When texturing a 3D model or authoring a PBR material",
+      "When building or fixing a map set (base color / normal / roughness / metallic / AO / height)",
+      "When UVs, seams, baking or texel density are the problem"
+    ],
+    "tools": ["blender", "magick"],
+    "workflow": [
+      "Pick a workflow: metallic-roughness (glTF/most engines) vs specular-glossiness; stay consistent.",
+      "Unwrap UVs with minimal stretch and sensible seams; keep uniform texel density across the model.",
+      "Author or acquire the map set; keep color maps in sRGB and data maps (normal/roughness/metallic/AO/height) in linear/non-color.",
+      "Bake high-to-low-poly maps (normal, AO, curvature) if needed; verify tangent-space normal orientation (OpenGL vs DirectX green channel).",
+      "Channel-pack where the target engine expects it (e.g. ORM = AO/Roughness/Metallic in R/G/B) and export at power-of-two resolutions."
+    ],
+    "commands": [
+      "magick albedo.png -resize 2048x2048 albedo_2k.png",
+      "magick ao.png roughness.png metallic.png -channel RGB -combine orm.png   # pack AO/Rough/Metal",
+      "blender -b scene.blend -P bake_maps.py   # headless bake via a Python script"
+    ],
+    "checklist": [
+      "Color maps sRGB; data maps set to Non-Color/linear",
+      "Normal map tangent space matches the target (OpenGL vs DirectX)",
+      "Consistent texel density; no wasted UV space; power-of-two resolutions"
+    ],
+    "pitfalls": [
+      "Roughness/metallic/normal tagged as sRGB (washed-out or wrong shading)",
+      "Flipped green channel on normal maps (lighting looks inverted)",
+      "Non-power-of-two or mismatched-resolution maps causing engine issues",
+      "Seams and uneven texel density from a rushed UV unwrap"
+    ],
+    "bodyMd": "## PBR map cheat-sheet\n\n| Map | Color space | Purpose |\n| --- | --- | --- |\n| Base color / Albedo | sRGB | Surface color, no lighting/AO baked in |\n| Normal | Non-Color (linear) | Surface detail; watch OpenGL vs DirectX green channel |\n| Roughness | Non-Color | Micro-surface roughness (invert for glossiness workflows) |\n| Metallic | Non-Color | Metal vs dielectric mask |\n| Ambient Occlusion | Non-Color | Baked contact shadow; multiply, don't bake into albedo |\n| Height / Displacement | Non-Color | Parallax/displacement; keep midpoint at 0.5 for parallax |\n| Emission | sRGB | Self-illumination |\n\nFor real-time engines, prefer the metallic-roughness workflow and pack **ORM** (AO=R, Roughness=G, Metallic=B). Author in a dedicated tool (Substance Painter, Blender, Materialize, Krita) and process/pack channels with ImageMagick when needed.",
+    "related": ["blender-mcp", "image-processing", "webassembly"]
+  },
+  {
+    "name": "blender-mcp",
+    "category": "3d-graphics",
+    "description": "Drive Blender from Claude through the Blender MCP server (BlenderMCP): create and edit scenes/objects, assign materials and textures, import PolyHaven/Hyper3D assets, run Python in Blender, and render. Use when controlling Blender programmatically via MCP. Requires Blender plus the BlenderMCP add-on and the blender-mcp server actually installed and connected.",
+    "summary": "Control a running Blender instance over MCP: scene/object edits, materials, assets, Python and renders.",
+    "whenToUse": [
+      "When the task is to build/modify a 3D scene or material in Blender via MCP",
+      "When importing assets (PolyHaven HDRIs/textures/models) or running Blender Python remotely",
+      "When applying the texture-3d workflow inside Blender through the MCP bridge"
+    ],
+    "tools": ["blender", "uvx", "blender-mcp"],
+    "workflow": [
+      "Confirm the setup exists: Blender installed, the BlenderMCP add-on enabled, and the `blender-mcp` server available (e.g. `uvx blender-mcp`). If any piece is missing, say so and give the install step — do not pretend it is connected.",
+      "In Blender's 3D viewport sidebar (N) open the BlenderMCP tab and click 'Connect to MCP server' so the add-on's socket server is listening.",
+      "Register the server with Claude Code (mcpServers entry) and confirm the tools appear before issuing commands.",
+      "Inspect scene state first (get_scene_info / get_object_info), then make small, reversible edits; save the .blend before large changes.",
+      "For textures/materials, follow the `texture-3d` skill (correct color spaces, PBR maps); render and review the result."
+    ],
+    "commands": [
+      "uvx blender-mcp                 # run the Blender MCP server (bridges MCP <-> the Blender add-on)",
+      "blender --version              # verify Blender is installed",
+      "blender -b -P script.py        # headless Blender Python as a fallback when MCP is not connected"
+    ],
+    "checklist": [
+      "Blender is open with the BlenderMCP add-on connected (socket listening)",
+      "Scene inspected before mutating; .blend saved before big operations",
+      "Edits are small and reversible; heavy/long operations don't block indefinitely"
+    ],
+    "pitfalls": [
+      "Sending commands while the add-on is not connected (server can't reach Blender)",
+      "Assuming assets/Python execute instantly — some operations are slow or block the UI",
+      "Overwriting or clearing the scene without saving first",
+      "Treating any AI-generated Blender Python as trusted — review it before running"
+    ],
+    "bodyMd": "## Setup (once)\n\n1. **Install Blender** (3.x/4.x) and confirm `blender --version`.\n2. **Install the BlenderMCP add-on** (from the BlenderMCP project) via Edit > Preferences > Add-ons > Install, then enable it.\n3. **Run the server**: `uvx blender-mcp` (needs `uv`/Python) — or add it to your MCP client config.\n4. In Blender, open the **BlenderMCP** sidebar tab and click **Connect to MCP server**.\n\n## Typical tools exposed\n\n`get_scene_info`, `get_object_info`, `execute_blender_code` (run Python in Blender), material/texture assignment, and asset import (PolyHaven, optional Hyper3D). Always inspect before mutating, and keep a saved `.blend` as a restore point.\n\n> This plugin also declares a `blender` MCP connector in `.claude-plugin/plugin.json` (via `uvx blender-mcp`). It only functions when Blender is open with the add-on connected; otherwise the tools are simply unavailable — which is honest, not broken.",
+    "related": ["texture-3d", "ai-api-integration", "llm-agents"]
+  }
+]

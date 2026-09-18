@@ -1,0 +1,45 @@
+{
+  "name": "ultimate-dev-toolkit",
+  "version": "1.0.0",
+  "description": "A modular, security-first universal developer toolkit for Claude Code: environment-aware skills, categorized slash commands, specialist agents and safety hooks spanning coding, git, docker, databases, security, testing, DevOps and more. Detects what is really installed and never pretends to support tools that are absent.",
+  "author": {
+    "name": "kaazuxx77-ctrl",
+    "url": "https://github.com/kaazuxx77-ctrl"
+  },
+  "homepage": "https://github.com/kaazuxx77-ctrl/ultimate-dev-toolkit",
+  "repository": "https://github.com/kaazuxx77-ctrl/ultimate-dev-toolkit",
+  "license": "MIT",
+  "keywords": [
+    "developer-tools",
+    "toolkit",
+    "devops",
+    "code-analysis",
+    "debugging",
+    "git",
+    "docker",
+    "database",
+    "security",
+    "testing",
+    "refactoring",
+    "claude-code",
+    "plugin"
+  ],
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    },
+    "blender": {
+      "command": "uvx",
+      "args": ["blender-mcp"]
+    }
+  }
+}
