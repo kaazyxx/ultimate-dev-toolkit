@@ -15,10 +15,10 @@
   <img alt="agents" src="https://img.shields.io/badge/agents-72-bb9af7?style=flat-square&labelColor=1a1b27" />
   <img alt="hooks" src="https://img.shields.io/badge/hooks-27-e0af68?style=flat-square&labelColor=1a1b27" />
   <img alt="connectors" src="https://img.shields.io/badge/connectors-4-9ece6a?style=flat-square&labelColor=1a1b27" />
-  <a href="https://github.com/kaazyxx/ultimate-dev-toolkit/stargazers"><img alt="stars" src="https://img.shields.io/github/stars/kaazyxx/ultimate-dev-toolkit?style=flat-square&labelColor=1a1b27&color=f7768e&label=%E2%98%85" /></a>
+  <a href="https://github.com/kaazyxx/ultimate-dev-toolkit/stargazers"><img alt="stars" src="https://img.shields.io/github/stars/kaazyxx/ultimate-dev-toolkit?style=flat-square&labelColor=1a1b27&color=f7768e&label=star" /></a>
 </p>
 
-<samp><b><a href="#-install">Install</a> · <a href="#-quick-start">Quick start</a> · <a href="#-whats-inside">What's inside</a> · <a href="#-how-it-fits-together">How it works</a> · <a href="#-extending">Extending</a> · <a href="docs/">Docs</a></b></samp>
+<samp><b><a href="#install">Install</a> · <a href="#quick-start">Quick start</a> · <a href="#whats-inside">What's inside</a> · <a href="#how-it-fits-together">How it works</a> · <a href="#extending">Extending</a> · <a href="docs/">Docs</a></b></samp>
 
 <br/>
 
@@ -29,14 +29,14 @@ for coding, git, Docker, databases, security, testing, DevOps, cloud, data/ML an
 
 <br/>
 
-## ✨ Why UDT
+## Why UDT
 
 |  |  |
 | --- | --- |
-| 🔒 **Security-first** | Destructive actions confirm first, arguments are validated, secrets are redacted, and an audit trail is kept. Protections are never disabled to make a command "more powerful". |
-| 🔎 **Honest detection** | Never claims a language or tool is supported unless it is actually installed. `/udt:doctor` runs real version probes and reports only what is truly present. |
-| 🧩 **Modular & data-driven** | The whole catalog is generated from small JSON files — add a skill/command/agent without touching the core. Scales to hundreds of capabilities. |
-| 🌍 **Universal** | 40+ languages, full-stack web, databases, DevOps, cloud, data/ML/AI, security, mobile, desktop, 3D/Blender… |
+| **Security-first** | Destructive actions confirm first, arguments are validated, secrets are redacted, and an audit trail is kept. Protections are never disabled to make a command "more powerful". |
+| **Honest detection** | Never claims a language or tool is supported unless it is actually installed. `/udt:doctor` runs real version probes and reports only what is truly present. |
+| **Modular & data-driven** | The whole catalog is generated from small JSON files — add a skill/command/agent without touching the core. Scales to hundreds of capabilities. |
+| **Universal** | 40+ languages, full-stack web, databases, DevOps, cloud, data/ML/AI, security, mobile, desktop, 3D/Blender… |
 
 > [!NOTE]
 > UDT is **not** a compiled program. It's a set of Markdown instructions and manifests that
@@ -47,12 +47,32 @@ for coding, git, Docker, databases, security, testing, DevOps, cloud, data/ML an
 
 <br/>
 
-## 📦 Install
+## Install
 
 > Requires **Node.js 18+** (for `/udt:doctor`, the catalog generator and the advisory hooks). Everything else is optional and detected at runtime.
 
+UDT is a standard Claude Code plugin, so it installs the same way everywhere — pick your client/source below, then run the two commands in a Claude Code session.
+
 <details open>
-<summary><b>From GitHub</b></summary>
+<summary><b>Option 1 — Claude Desktop app</b></summary>
+
+<br/>
+
+1. Open a **Code** session in the Claude desktop app.
+2. In the chat box, add the marketplace and install:
+   ```
+   /plugin marketplace add kaazyxx/ultimate-dev-toolkit
+   /plugin install ultimate-dev-toolkit
+   ```
+3. Approve the install dialog. You can toggle/manage it anytime from the **Plugins** panel.
+
+Full walkthrough → [docs/claude-desktop.md](docs/claude-desktop.md)
+</details>
+
+<details>
+<summary><b>Option 2 — Claude Code CLI (terminal)</b></summary>
+
+<br/>
 
 ```
 /plugin marketplace add kaazyxx/ultimate-dev-toolkit
@@ -61,7 +81,22 @@ for coding, git, Docker, databases, security, testing, DevOps, cloud, data/ML an
 </details>
 
 <details>
-<summary><b>From a local clone</b></summary>
+<summary><b>Option 3 — Claude Code on the web</b></summary>
+
+<br/>
+
+Same two commands in a web Code session:
+
+```
+/plugin marketplace add kaazyxx/ultimate-dev-toolkit
+/plugin install ultimate-dev-toolkit
+```
+</details>
+
+<details>
+<summary><b>Option 4 — From a local clone</b></summary>
+
+<br/>
 
 ```bash
 git clone https://github.com/kaazyxx/ultimate-dev-toolkit
@@ -79,11 +114,11 @@ Then verify your environment:
 /udt:help        # browse every command
 ```
 
-Full guide → [docs/installation.md](docs/installation.md) · Desktop app walkthrough → [docs/claude-desktop.md](docs/claude-desktop.md)
+Full guide → [docs/installation.md](docs/installation.md)
 
 <br/>
 
-## ⚡ Quick start
+## Quick start
 
 ```bash
 /udt:doctor
@@ -96,7 +131,7 @@ Full guide → [docs/installation.md](docs/installation.md) · Desktop app walkt
 
 <br/>
 
-## 🧰 What's inside
+## What's inside
 
 <div align="center">
 
@@ -128,6 +163,8 @@ Full reference → [docs/commands.md](docs/commands.md)
 <details>
 <summary><b>353 skills across 15+ domains</b> (click to expand)</summary>
 
+<br/>
+
 - **Core** — environment-detection, safe-execution, command-registry, pipelines
 - **Engineering** — code-analysis, debugging, refactoring, code-generation, testing-strategy, performance-profiling, …
 - **Languages (40+)** — python, typescript, rust, go, cpp, java, kotlin, swift, csharp, ruby, php, elixir, haskell, solidity, assembly, cobol, … + shell/sql
@@ -144,7 +181,7 @@ Full reference → [docs/commands.md](docs/commands.md)
 Full reference → [docs/skills.md](docs/skills.md)
 </details>
 
-### Agents · Hooks · Connectors
+### Agents, hooks, connectors
 
 - **72 agents** — `code-reviewer`, `debug-detective`, `security-auditor`, per-language reviewers & build-resolvers → [docs/agents.md](docs/agents.md)
 - **27 hooks** — advisory safety guards (destructive-command & secret-write reminders) + an audit trail, one fast dispatcher, **never block by default** → [docs/security.md](docs/security.md)
@@ -152,7 +189,7 @@ Full reference → [docs/skills.md](docs/skills.md)
 
 <br/>
 
-## 🛠️ How it fits together
+## How it fits together
 
 The catalog is authored as data; a generator validates it and emits every file **plus** the reference docs — the command registry and auto-documentation in one.
 
@@ -178,7 +215,7 @@ npm run doctor   # environment report
 
 <br/>
 
-## 🧱 Extending
+## Extending
 
 Add a capability by editing `scripts/catalog/*.json` and rebuilding, or ship a self-contained
 extension under [`extensions/`](extensions/README.md) (a working template is included).
@@ -194,7 +231,7 @@ Guide → [docs/extending.md](docs/extending.md)
 
 <br/>
 
-## 📚 Documentation
+## Documentation
 
 | Doc | Purpose |
 | --- | --- |
@@ -210,7 +247,7 @@ Guide → [docs/extending.md](docs/extending.md)
 
 <div align="center">
 
-### 📄 License
+### License
 
 MIT — see [LICENSE](LICENSE).
 
