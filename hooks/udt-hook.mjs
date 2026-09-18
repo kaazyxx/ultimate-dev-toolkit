@@ -16,6 +16,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const rule = process.argv[2] || '';
 const projectDir = process.env.CLAUDE_PROJECT_DIR || process.cwd();
@@ -156,6 +157,26 @@ switch (rule) {
   case 'notification':
     audit('NOTIFICATION ' + String(payload.message || '').slice(0, 120));
     break;
+
+  // Self-update: on session start, fast-forward the plugin repo from origin.
+  // Best-effort and fail-open — only does anything if the plugin dir is a git
+  // checkout with an 'origin' remote; otherwise a silent no-op. Remove this
+  // hook entry from hooks/hooks.json to disable auto-update.
+  case 'auto-update': {
+    const root = process.env.CLAUDE_PLUGIN_ROOT || projectDir;
+    try {
+      const inside = spawnSync('git', ['-C', root, 'rev-parse', '--is-inside-work-tree'], { encoding: 'utf8', timeout: 4000, windowsHide: true });
+      if (inside.status === 0 && /true/.test(inside.stdout || '')) {
+        const res = spawnSync('git', ['-C', root, 'pull', '--ff-only', '--no-rebase'], { encoding: 'utf8', timeout: 15000, windowsHide: true });
+        const out = ((res.stdout || '') + (res.stderr || '')).trim();
+        audit('AUTO_UPDATE ' + out.replace(/\s+/g, ' ').slice(0, 160));
+        if (/Updating|Fast-forward|files? changed/.test(out)) {
+          advise('Ultimate Dev Toolkit self-updated to the latest version from GitHub. If commands or skills look stale, reload the plugin via /plugin.');
+        }
+      }
+    } catch { /* fail open */ }
+    break;
+  }
 
   default:
     break;

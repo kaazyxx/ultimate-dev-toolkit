@@ -4,6 +4,21 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/) and
 [Semantic Versioning](https://semver.org/).
 
+## [1.4.0] - 2026-09-18
+
+### Added
+- **Auto-update:** a SessionStart hook fast-forwards the plugin from GitHub each session (best-effort, fail-open; disable by removing the `auto-update` hook entry).
+- Domain-vertical skills: healthcare (FHIR), fintech/payments, e-commerce, legal-tech, edtech, proptech, insurtech, adtech.
+- Emerging-tech skills: TinyML/edge AI, AR filters, digital twins, IoT edge computing, spatial computing.
+- Creative-code skills: generative art, creative coding, music programming, motion-graphics code, data art.
+- Ops skills: FinOps, GreenOps/sustainability.
+- Commands: domain (fhir-validate), fintech (pci-scope), ecom (inventory-audit), art (sketch), ml (tinyml), ops (finops/carbon), media (render).
+- Agents: healthcare-fhir-reviewer, fintech-payments-reviewer, tinyml-reviewer, creative-code-reviewer, finops-analyst, ecommerce-reviewer.
+
+### Changed
+- Agents load extensibly; the generator/validator already glob `agents*.json`.
+- Totals: **466 skills, 156 commands, 102 agents, 28 hooks, 4 connectors**.
+
 ## [1.3.0] - 2026-09-18
 
 ### Added

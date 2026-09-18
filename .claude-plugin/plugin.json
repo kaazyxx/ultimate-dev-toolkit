@@ -1,6 +1,6 @@
 {
   "name": "ultimate-dev-toolkit",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A modular, security-first universal developer toolkit for Claude Code: environment-aware skills, categorized slash commands, specialist agents and safety hooks spanning coding, git, docker, databases, security, testing, DevOps and more. Detects what is really installed and never pretends to support tools that are absent.",
   "author": {
     "name": "kaazuxx77-ctrl",

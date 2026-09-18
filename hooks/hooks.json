@@ -25,6 +25,7 @@
       { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/udt-hook.mjs\" prompt-risky" } ] }
     ],
     "SessionStart": [
+      { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/udt-hook.mjs\" auto-update" } ] },
       { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/udt-hook.mjs\" session-start" } ] },
       { "hooks": [ { "type": "command", "command": "node \"${CLAUDE_PLUGIN_ROOT}/hooks/udt-hook.mjs\" session-init" } ] }
     ],
