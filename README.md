@@ -3,16 +3,16 @@
 <img src="https://capsule-render.vercel.app/api?type=venom&color=gradient&customColorList=12,20,24,30&height=190&section=header&text=Ultimate%20Dev%20Toolkit&fontSize=46&fontColor=ffffff&desc=security-first%20universal%20toolkit%20for%20Claude%20Code&descSize=18&descAlignY=64" alt="Ultimate Dev Toolkit" />
 
 <p>
-  <img alt="version" src="https://img.shields.io/badge/version-1.2.0-7aa2f7?style=for-the-badge&labelColor=1a1b27" />
+  <img alt="version" src="https://img.shields.io/badge/version-1.3.0-7aa2f7?style=for-the-badge&labelColor=1a1b27" />
   <img alt="license" src="https://img.shields.io/badge/license-MIT-9ece6a?style=for-the-badge&labelColor=1a1b27" />
   <img alt="platform" src="https://img.shields.io/badge/Claude%20Code-plugin-bb9af7?style=for-the-badge&labelColor=1a1b27&logo=anthropic&logoColor=white" />
   <img alt="node" src="https://img.shields.io/badge/node-%E2%89%A518-9ece6a?style=for-the-badge&labelColor=1a1b27&logo=nodedotjs&logoColor=white" />
 </p>
 
 <p>
-  <img alt="skills" src="https://img.shields.io/badge/skills-416-7aa2f7?style=flat-square&labelColor=1a1b27" />
-  <img alt="commands" src="https://img.shields.io/badge/commands-136-7dcfff?style=flat-square&labelColor=1a1b27" />
-  <img alt="agents" src="https://img.shields.io/badge/agents-88-bb9af7?style=flat-square&labelColor=1a1b27" />
+  <img alt="skills" src="https://img.shields.io/badge/skills-446-7aa2f7?style=flat-square&labelColor=1a1b27" />
+  <img alt="commands" src="https://img.shields.io/badge/commands-148-7dcfff?style=flat-square&labelColor=1a1b27" />
+  <img alt="agents" src="https://img.shields.io/badge/agents-96-bb9af7?style=flat-square&labelColor=1a1b27" />
   <img alt="hooks" src="https://img.shields.io/badge/hooks-27-e0af68?style=flat-square&labelColor=1a1b27" />
   <img alt="connectors" src="https://img.shields.io/badge/connectors-4-9ece6a?style=flat-square&labelColor=1a1b27" />
   <a href="https://github.com/kaazyxx/ultimate-dev-toolkit/stargazers"><img alt="stars" src="https://img.shields.io/github/stars/kaazyxx/ultimate-dev-toolkit?style=flat-square&labelColor=1a1b27&color=f7768e&label=star" /></a>
@@ -135,9 +135,9 @@ Full guide → [docs/installation.md](docs/installation.md)
 
 <div align="center">
 
-![Skills](https://img.shields.io/badge/416-skills-7aa2f7?style=for-the-badge&labelColor=1a1b27)
-![Commands](https://img.shields.io/badge/136-commands-7dcfff?style=for-the-badge&labelColor=1a1b27)
-![Agents](https://img.shields.io/badge/88-agents-bb9af7?style=for-the-badge&labelColor=1a1b27)
+![Skills](https://img.shields.io/badge/446-skills-7aa2f7?style=for-the-badge&labelColor=1a1b27)
+![Commands](https://img.shields.io/badge/148-commands-7dcfff?style=for-the-badge&labelColor=1a1b27)
+![Agents](https://img.shields.io/badge/96-agents-bb9af7?style=for-the-badge&labelColor=1a1b27)
 ![Hooks](https://img.shields.io/badge/27-hooks-e0af68?style=for-the-badge&labelColor=1a1b27)
 ![Connectors](https://img.shields.io/badge/4-connectors-9ece6a?style=for-the-badge&labelColor=1a1b27)
 
@@ -161,7 +161,7 @@ Full reference → [docs/commands.md](docs/commands.md)
 ### Skills
 
 <details>
-<summary><b>416 skills across 15+ domains</b> (click to expand)</summary>
+<summary><b>446 skills across 15+ domains</b> (click to expand)</summary>
 
 <br/>
 
@@ -182,6 +182,10 @@ Full reference → [docs/commands.md](docs/commands.md)
 - **Scientific** — bioinformatics, quantum, GIS/geospatial, robotics (ROS), signal processing, numerical methods, computer algebra
 - **Emerging languages** — elm, gleam, mojo, purescript, roc, ballerina
 - **Platform / reproducibility** — nix, direnv, just, tmux, platform-engineering, Backstage, GitOps (Flux), infra-testing, chaos
+- **Product / design** — UX research, wireframing, design tokens, information architecture, usability testing, conversion optimization
+- **Business / growth** — product analytics, growth experimentation, SaaS metrics, pricing, CRM integration
+- **Media / content** — video/audio processing, static-site generators, headless CMS, digital asset management
+- **Realtime / data-eng** — WebRTC, P2P, CDN/edge, QUIC/HTTP-3, lakehouse, change-data-capture, data contracts, data mesh
 - **Architecture · Quality · Testing · Tooling · Automation · Networking**
 
 Full reference → [docs/skills.md](docs/skills.md)
@@ -189,7 +193,7 @@ Full reference → [docs/skills.md](docs/skills.md)
 
 ### Agents, hooks, connectors
 
-- **88 agents** — `code-reviewer`, `debug-detective`, `security-auditor`, per-language reviewers & build-resolvers → [docs/agents.md](docs/agents.md)
+- **96 agents** — `code-reviewer`, `debug-detective`, `security-auditor`, per-language reviewers & build-resolvers → [docs/agents.md](docs/agents.md)
 - **27 hooks** — advisory safety guards (destructive-command & secret-write reminders) + an audit trail, one fast dispatcher, **never block by default** → [docs/security.md](docs/security.md)
 - **4 connectors** — `sequential-thinking` · `memory` · `filesystem` · `blender` (MCP servers)
 

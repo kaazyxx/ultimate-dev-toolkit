@@ -4,6 +4,20 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/) and
 [Semantic Versioning](https://semver.org/).
 
+## [1.3.0] - 2026-09-18
+
+### Added
+- Product/design skills: UX research, wireframing/prototyping, design tokens, figma-to-code, information architecture, usability testing, conversion optimization.
+- Business/growth skills: product analytics, growth experimentation, SaaS metrics, pricing strategy, analytics instrumentation, CRM integration, customer feedback.
+- Media/content skills: video processing, audio editing, markdown tooling, static-site generators, headless CMS, digital asset management.
+- Realtime/networking skills: WebRTC, P2P networking, CDN/edge, QUIC/HTTP-3, network observability.
+- Data-engineering skills: lakehouse, change-data-capture, data catalog, data contracts, data mesh.
+- Commands: product (analytics-plan/funnel), media (convert/optimize), data (cdc/contract), net (webrtc-debug), perf (budget), qa (visual-diff), dev (i18n-extract/sitemap), cms (model).
+- Agents: ux-reviewer, analytics-reviewer, webrtc-reviewer, data-contract-reviewer, media-pipeline-reviewer, growth-analyst, cdn-edge-reviewer, cms-reviewer.
+
+### Changed
+- Totals: **446 skills, 148 commands, 96 agents, 27 hooks, 4 connectors**.
+
 ## [1.2.0] - 2026-09-18
 
 ### Added
