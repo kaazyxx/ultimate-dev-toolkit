@@ -1,19 +1,29 @@
-# Ultimate Dev Toolkit (UDT)
+<div align="center">
 
-> A modular, security-first **universal developer toolkit** delivered as a
-> [Claude Code](https://claude.com/claude-code) plugin — skills, slash commands,
-> specialist agents, safety hooks and connectors that span coding, git, Docker,
-> databases, security, testing, DevOps, cloud, data/ML and more.
+<img src="https://capsule-render.vercel.app/api?type=venom&color=gradient&customColorList=12,20,24,30&height=180&section=header&text=Ultimate%20Dev%20Toolkit&fontSize=46&fontColor=ffffff&desc=security-first%20universal%20toolkit%20for%20Claude%20Code&descSize=18&descAlignY=64" alt="Ultimate Dev Toolkit" />
 
-<p align="center">
-  <img alt="version" src="https://img.shields.io/badge/version-1.0.0-blue">
-  <img alt="license" src="https://img.shields.io/badge/license-MIT-green">
-  <img alt="platform" src="https://img.shields.io/badge/Claude%20Code-plugin-6E56CF">
+<p>
+  <img alt="version" src="https://img.shields.io/badge/version-1.0.0-7aa2f7?style=for-the-badge&labelColor=1a1b27" />
+  <img alt="license" src="https://img.shields.io/badge/license-MIT-9ece6a?style=for-the-badge&labelColor=1a1b27" />
+  <img alt="platform" src="https://img.shields.io/badge/Claude%20Code-plugin-bb9af7?style=for-the-badge&labelColor=1a1b27&logo=anthropic&logoColor=white" />
+  <img alt="node" src="https://img.shields.io/badge/node-%E2%89%A518-9ece6a?style=for-the-badge&labelColor=1a1b27&logo=nodedotjs&logoColor=white" />
 </p>
 
-| Skills | Commands | Agents | Hooks | Connectors |
-| :---: | :---: | :---: | :---: | :---: |
-| **351** | **112** | **72** | **27** | **3** |
+<p>
+  <img alt="skills" src="https://img.shields.io/badge/skills-353-7aa2f7?style=flat-square&labelColor=1a1b27" />
+  <img alt="commands" src="https://img.shields.io/badge/commands-112-7dcfff?style=flat-square&labelColor=1a1b27" />
+  <img alt="agents" src="https://img.shields.io/badge/agents-72-bb9af7?style=flat-square&labelColor=1a1b27" />
+  <img alt="hooks" src="https://img.shields.io/badge/hooks-27-e0af68?style=flat-square&labelColor=1a1b27" />
+  <img alt="connectors" src="https://img.shields.io/badge/connectors-4-9ece6a?style=flat-square&labelColor=1a1b27" />
+  <a href="https://github.com/kaazyxx/ultimate-dev-toolkit/stargazers"><img alt="stars" src="https://img.shields.io/github/stars/kaazyxx/ultimate-dev-toolkit?style=flat-square&labelColor=1a1b27&color=f7768e&label=%E2%98%85" /></a>
+</p>
+
+<em>skills · slash commands · specialist agents · safety hooks · MCP connectors — for coding, git,
+Docker, databases, security, testing, DevOps, cloud, data/ML and more.</em>
+
+</div>
+
+<br/>
 
 ---
 
