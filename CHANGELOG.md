@@ -4,6 +4,24 @@ All notable changes to this project are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/) and
 [Semantic Versioning](https://semver.org/).
 
+## [2.0.0] - 2026-09-18
+
+### Added
+- **Testing & QA:** API fuzzing, flaky-test management, test-data management, synthetic monitoring, accessibility testing, performance testing, coverage-gap analysis, test parallelization.
+- **Distributed patterns:** saga orchestration, transactional outbox, idempotent consumers, BFF, GraphQL federation, API versioning, multi-tenancy, service discovery, backpressure/flow control, resilience patterns.
+- **Advanced frontend:** micro-frontends, Web Components, state machines/statecharts, offline-first, Web Workers, CSS architecture, web animations, module federation.
+- **Advanced AI/LLM:** guardrails, prompt-injection defense, RAG evaluation, model registry, LLM observability, semantic caching, structured output, agent memory, multimodal AI, LLM routing.
+- **Emerging languages:** Pony, Chapel, Hare, Unison, Koka, Grain, Wren, Janet.
+- **DevEx & release:** devcontainers, Conventional Commits, CODEOWNERS, PR automation, Renovate/Dependabot dependency updates.
+- **Durable/workflow:** durable execution, workflow engines, event mesh, semantic layer, headless commerce.
+- Commands: qa (fuzz-api/flaky-report/a11y-audit/perf-test), patterns (saga-design/outbox-check/resilience-audit/tenancy-check/backpressure-check), frontend (microfe-plan/statechart), ai (llm-guardrail/rag-eval/prompt-injection-scan/structured-output), devex (devcontainer/conv-commits/renovate-setup), workflow (workflow-design/semantic-layer).
+- Agents: saga-reviewer, resilience-reviewer, multi-tenancy-reviewer, graphql-federation-reviewer, micro-frontend-reviewer, web-components-reviewer, state-machine-reviewer, offline-first-reviewer, llm-guardrails-reviewer, prompt-injection-auditor, rag-evaluator, llm-observability-reviewer, structured-output-reviewer, agent-memory-reviewer, flaky-test-hunter, performance-test-engineer, devcontainer-reviewer, durable-workflow-reviewer.
+
+### Changed
+- Corrected the plugin/marketplace author and repository URLs to `kaazyxx`.
+- Hardened the destructive-database hook guard so the word "update" in an ordinary shell command no longer triggers a false SQL alert.
+- Totals: **520 skills, 176 commands, 120 agents, 28 hooks, 4 connectors** — the largest release yet.
+
 ## [1.4.0] - 2026-09-18
 
 ### Added

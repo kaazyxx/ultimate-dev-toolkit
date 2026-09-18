@@ -3,16 +3,16 @@
 <img src="https://capsule-render.vercel.app/api?type=venom&color=gradient&customColorList=12,20,24,30&height=190&section=header&text=Ultimate%20Dev%20Toolkit&fontSize=46&fontColor=ffffff&desc=security-first%20universal%20toolkit%20for%20Claude%20Code&descSize=18&descAlignY=64" alt="Ultimate Dev Toolkit" />
 
 <p>
-  <img alt="version" src="https://img.shields.io/badge/version-1.4.0-7aa2f7?style=for-the-badge&labelColor=1a1b27" />
+  <img alt="version" src="https://img.shields.io/badge/version-2.0.0-7aa2f7?style=for-the-badge&labelColor=1a1b27" />
   <img alt="license" src="https://img.shields.io/badge/license-MIT-9ece6a?style=for-the-badge&labelColor=1a1b27" />
   <img alt="platform" src="https://img.shields.io/badge/Claude%20Code-plugin-bb9af7?style=for-the-badge&labelColor=1a1b27&logo=anthropic&logoColor=white" />
   <img alt="node" src="https://img.shields.io/badge/node-%E2%89%A518-9ece6a?style=for-the-badge&labelColor=1a1b27&logo=nodedotjs&logoColor=white" />
 </p>
 
 <p>
-  <img alt="skills" src="https://img.shields.io/badge/skills-466-7aa2f7?style=flat-square&labelColor=1a1b27" />
-  <img alt="commands" src="https://img.shields.io/badge/commands-156-7dcfff?style=flat-square&labelColor=1a1b27" />
-  <img alt="agents" src="https://img.shields.io/badge/agents-102-bb9af7?style=flat-square&labelColor=1a1b27" />
+  <img alt="skills" src="https://img.shields.io/badge/skills-520-7aa2f7?style=flat-square&labelColor=1a1b27" />
+  <img alt="commands" src="https://img.shields.io/badge/commands-176-7dcfff?style=flat-square&labelColor=1a1b27" />
+  <img alt="agents" src="https://img.shields.io/badge/agents-120-bb9af7?style=flat-square&labelColor=1a1b27" />
   <img alt="hooks" src="https://img.shields.io/badge/hooks-28-e0af68?style=flat-square&labelColor=1a1b27" />
   <img alt="connectors" src="https://img.shields.io/badge/connectors-4-9ece6a?style=flat-square&labelColor=1a1b27" />
   <a href="https://github.com/kaazyxx/ultimate-dev-toolkit/stargazers"><img alt="stars" src="https://img.shields.io/github/stars/kaazyxx/ultimate-dev-toolkit?style=flat-square&labelColor=1a1b27&color=f7768e&label=star" /></a>
@@ -138,9 +138,9 @@ Full guide → [docs/installation.md](docs/installation.md)
 
 <div align="center">
 
-![Skills](https://img.shields.io/badge/466-skills-7aa2f7?style=for-the-badge&labelColor=1a1b27)
-![Commands](https://img.shields.io/badge/156-commands-7dcfff?style=for-the-badge&labelColor=1a1b27)
-![Agents](https://img.shields.io/badge/102-agents-bb9af7?style=for-the-badge&labelColor=1a1b27)
+![Skills](https://img.shields.io/badge/520-skills-7aa2f7?style=for-the-badge&labelColor=1a1b27)
+![Commands](https://img.shields.io/badge/176-commands-7dcfff?style=for-the-badge&labelColor=1a1b27)
+![Agents](https://img.shields.io/badge/120-agents-bb9af7?style=for-the-badge&labelColor=1a1b27)
 ![Hooks](https://img.shields.io/badge/28-hooks-e0af68?style=for-the-badge&labelColor=1a1b27)
 ![Connectors](https://img.shields.io/badge/4-connectors-9ece6a?style=for-the-badge&labelColor=1a1b27)
 
@@ -164,7 +164,7 @@ Full reference → [docs/commands.md](docs/commands.md)
 ### Skills
 
 <details>
-<summary><b>466 skills across 15+ domains</b> (click to expand)</summary>
+<summary><b>520 skills across 15+ domains</b> (click to expand)</summary>
 
 <br/>
 
@@ -200,7 +200,7 @@ Full reference → [docs/skills.md](docs/skills.md)
 
 ### Agents, hooks, connectors
 
-- **102 agents** — `code-reviewer`, `debug-detective`, `security-auditor`, per-language reviewers & build-resolvers → [docs/agents.md](docs/agents.md)
+- **120 agents** — `code-reviewer`, `debug-detective`, `security-auditor`, per-language reviewers & build-resolvers → [docs/agents.md](docs/agents.md)
 - **28 hooks** — advisory safety guards (including SessionStart **auto-update**) (destructive-command & secret-write reminders) + an audit trail, one fast dispatcher, **never block by default** → [docs/security.md](docs/security.md)
 - **4 connectors** — `sequential-thinking` · `memory` · `filesystem` · `blender` (MCP servers)
 

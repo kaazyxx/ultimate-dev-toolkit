@@ -75,7 +75,7 @@ switch (rule) {
       advise('History-rewriting or force git operation detected. Ensure the branch is unshared and coordinate; rotate any exposed secret regardless (git-history-rewrite skill).');
     break;
   case 'guard-data':
-    if (matchesCmd(/\bDROP\s+(TABLE|DATABASE|SCHEMA)\b|\bTRUNCATE\b|\b(DELETE|UPDATE)\b(?![^;]*\bWHERE\b)|FLUSHALL|FLUSHDB/i))
+    if (matchesCmd(/\bDROP\s+(TABLE|DATABASE|SCHEMA)\b|\bTRUNCATE\s+(TABLE\s+)?["'\w.]+|\bDELETE\s+FROM\b(?![^;]*\bWHERE\b)|\bUPDATE\s+["'\w.]+\s+SET\b(?![^;]*\bWHERE\b)|\bFLUSHALL\b|\bFLUSHDB\b/i))
       advise('Destructive database statement detected (DROP/TRUNCATE or DELETE/UPDATE without WHERE). Confirm and back up first (safe-execution skill).');
     break;
   case 'guard-cloud':

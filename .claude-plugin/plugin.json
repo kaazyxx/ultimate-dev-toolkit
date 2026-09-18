@@ -1,13 +1,13 @@
 {
   "name": "ultimate-dev-toolkit",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "description": "A modular, security-first universal developer toolkit for Claude Code: environment-aware skills, categorized slash commands, specialist agents and safety hooks spanning coding, git, docker, databases, security, testing, DevOps and more. Detects what is really installed and never pretends to support tools that are absent.",
   "author": {
-    "name": "kaazuxx77-ctrl",
-    "url": "https://github.com/kaazuxx77-ctrl"
+    "name": "kaazyxx",
+    "url": "https://github.com/kaazyxx"
   },
-  "homepage": "https://github.com/kaazuxx77-ctrl/ultimate-dev-toolkit",
-  "repository": "https://github.com/kaazuxx77-ctrl/ultimate-dev-toolkit",
+  "homepage": "https://github.com/kaazyxx/ultimate-dev-toolkit",
+  "repository": "https://github.com/kaazyxx/ultimate-dev-toolkit",
   "license": "MIT",
   "keywords": [
     "developer-tools",
